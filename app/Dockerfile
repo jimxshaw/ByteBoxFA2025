@@ -4,6 +4,9 @@ FROM python:3.11-slim
 # Set the working directory inside the container.
 WORKDIR /app
 
+# Set Flask environment variable.
+ENV FLASK_ENV=development
+
 # Copy over the Python dependencies.
 COPY requirements.txt .
 
