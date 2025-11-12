@@ -12,6 +12,8 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/bytebox
     depends_on:
       - db
+    command: >
+      sh -c "python app/bootstrap_db.py && python app/app.py"
 
   db:
     image: postgres:15
