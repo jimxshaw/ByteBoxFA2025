@@ -16,5 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the code.
 COPY . .
 
+# Update the permissions of the shell script.
+RUN chmod +x entrypoint.sh
+
 # Start the Flask application.
-CMD ["python", "app.py"]
+CMD ["sh", "entrypoint.sh"]
