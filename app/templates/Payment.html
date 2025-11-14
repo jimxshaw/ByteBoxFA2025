@@ -1,0 +1,35 @@
+<!-- payment.html -->
+<h1>Payment Management</h1>
+<form method="POST" action="/payment/create">
+  <label for="payment_date">Payment Date:</label>
+  <input type="text" name="payment_date" required>
+
+  <label for="amount">Amount:</label>
+  <input type="text" name="amount" required>
+
+  <label for="method">Method:</label>
+  <input type="text" name="method" required>
+
+  <label for="contract_id">Contract ID:</label>
+  <input type="text" name="contract_id" required>
+
+  <input type="submit" value="Create Payment">  
+</form>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Payment Date</th>
+    <th>Amount</th>
+    <th>Method</th>
+    <th>Contract ID</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>20251231</td>
+    <td>145</td>
+    <td>Credit Card</td>
+    <td>3624</td>
+    <td><a href="/payment/edit/1">Edit</a> | <a href="/payment/delete/1">Delete</a></td>
+  </tr>
+</table>
