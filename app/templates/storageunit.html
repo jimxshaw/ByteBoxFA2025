@@ -1,0 +1,25 @@
+<!-- storageunit.html -->
+<h1>Storage Unit Management</h1>
+<form method="POST" action="/storageunit/create">
+  <label for="floor">Floor:</label>
+  <input type="text" name="floor" required>
+
+  <label for="climate_controlled">Climate Controlled:</label>
+  <input type="text" name="climate_controlled" required>
+
+  <input type="submit" value="Create Storage Unit">  
+</form>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Floor</th>
+    <th>Climate Controlled</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2</td>
+    <td>False</td>
+    <td><a href="/storageunit/edit/1">Edit</a> | <a href="/storageunit/delete/1">Delete</a></td>
+  </tr>
+</table>
