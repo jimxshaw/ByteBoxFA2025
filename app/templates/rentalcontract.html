@@ -1,0 +1,40 @@
+<!-- rentalcontract.html -->
+<h1>Rental Contract Management</h1>
+<form method="POST" action="/rentalcontract/create">
+  <label for="start_date">Start Date:</label>
+  <input type="text" name="start_date" required>
+
+  <label for="end_date">End Date:</label>
+  <input type="text" name="end_date" required>
+
+  <label for="monthly_rate">Monthly Rate:</label>
+  <input type="text" name="monthly_rate" required>
+
+  <label for="customer_id">Customer ID:</label>
+  <input type="text" name="customer_id" required>
+
+    <label for="unit_id">Unit ID:</label>
+  <input type="text" name="unit_id" required>
+
+  <input type="submit" value="Create Rental Contract">  
+</form>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Monthly Rate</th>
+    <th>Customer ID</th>
+    <th>Unit ID</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>20250101</td>
+    <td>20261231</td>
+    <td>250</td>
+    <td>1</td>
+    <td>26</td>
+    <td><a href="/rentalcontract/edit/1">Edit</a> | <a href="/rentalcontract/delete/1">Delete</a></td>
+  </tr>
+</table>
