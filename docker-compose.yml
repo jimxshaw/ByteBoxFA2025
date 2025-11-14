@@ -8,8 +8,11 @@ services:
     volumes:
       - ./app:/app
     environment:
-      - FLASK_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/bytebox
+      FLASK_ENV: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bytebox
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/bytebox
     depends_on:
       - db
 
@@ -22,6 +25,8 @@ services:
       POSTGRES_DB: bytebox
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./create.sql:/docker-entrypoint-initdb.d/01-create.sql
+      - ./load.sql:/docker-entrypoint-initdb.d/02-load.sql
 
 volumes:
   pgdata:

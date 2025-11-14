@@ -16,7 +16,7 @@ CREATE TABLE ClimateControl (
 
 CREATE TABLE StorageUnit (
     ID SERIAL PRIMARY KEY,
-    Floor INTEGER NOT NULL 
+    Floor INTEGER NOT NULL, 
     ClimateControlled BOOLEAN NOT NULL,
     
     CONSTRAINT CheckStorageUnitFloorValue CHECK (Floor >= 0),
@@ -28,7 +28,7 @@ CREATE TABLE RentalContract (
     ID SERIAL PRIMARY KEY,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
-    MonthlyRate DECIMAL(10, 2) NOT NULL 
+    MonthlyRate DECIMAL(10, 2) NOT NULL, 
     Customer_ID INTEGER NOT NULL,
     Unit_ID INTEGER NOT NULL,
     
@@ -42,7 +42,7 @@ CREATE TABLE RentalContract (
 CREATE TABLE Payment (
     ID SERIAL PRIMARY KEY,
     PaymentDate DATE NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL 
+    Amount DECIMAL(10, 2) NOT NULL, 
     Method VARCHAR(50) NOT NULL,
     Contract_ID INTEGER NOT NULL,
 
