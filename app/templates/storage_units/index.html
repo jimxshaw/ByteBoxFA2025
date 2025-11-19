@@ -1,0 +1,36 @@
+<!-- templates/storage_units/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storage Units</title>
+</head>
+<body>
+  <h1>All Storage Units</h1>
+
+  <a href="{{ url_for('create_storage_unit') }}">Add New Unit</a>
+
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Floor</th>
+      <th>Climate Controlled</th>
+      <th>Actions</th>
+    </tr>
+    {% for unit in units %}
+    <tr>
+      <td>{{ unit[0] }}</td>
+      <td>{{ unit[1] }}</td>
+      <td>{{ "Yes" if unit[2] else "No" }}</td>
+      <td>
+        <form action="{{ url_for('delete_storage_unit', id=unit[0]) }}" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Delete this unit?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <br>
+  <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

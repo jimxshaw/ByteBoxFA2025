@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit Payment</title>
+</head>
+
+<body>
+  <h1>Edit Payment #{{ payment[0] }}</h1>
+  <form method="post">
+    <label>Payment Method:</label><br>
+    <input type="text" name="method" value="{{ payment[3] }}" required><br><br>
+
+    <button type="submit">Update</button>
+  </form>
+</body>
+
+</html>

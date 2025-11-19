@@ -31,7 +31,7 @@ def list_customers():
 
   cursor.close()
   conn.close()
-  return render_template("customer_list.html", customers=customers)
+  return render_template("customers/index.html", customers=customers)
 
 # Create.
 @app.route("/customers/new", methods=["GET", "POST"])
@@ -56,7 +56,7 @@ def add_customer():
         cursor.close()
         conn.close()
         return redirect(url_for("list_customers"))
-    return render_template("customer_create.html")
+    return render_template("customers/new.html")
 
 # Update.
 @app.route("/customers/<int:id>/edit", methods=["GET", "POST"])
@@ -89,7 +89,7 @@ def edit_customer(id):
 
     cursor.close()
     conn.close()
-    return render_template("customer_edit.html", customer=customer)
+    return render_template("customers/edit.html", customer=customer)
 
 # Delete.
 @app.route("/customers/<int:id>/delete", methods=["POST"])
@@ -316,9 +316,9 @@ def delete_rental_contract(id):
     return redirect(url_for("list_rental_contracts"))
 
 
-################
-# PAYMEN ROUTES
-################
+#################
+# PAYMENT ROUTES
+#################
 # Read.
 @app.route("/payments")
 def list_payments():

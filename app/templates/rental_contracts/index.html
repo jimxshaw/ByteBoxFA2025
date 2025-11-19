@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rental Contracts</title>
+</head>
+<body>
+  <h1>Rental Contracts</h1>
+
+  <a href="{{ url_for('new_rental_contract') }}">New Rental Contract</a>
+
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Monthly Rate</th>
+      <th>Customer Name</th>
+      <th>Unit Number</th>
+      <th>Actions</th>
+    </tr>
+    {% for rc in contracts %}
+    <tr>
+      <td>{{ rc[0] }}</td>
+      <td>{{ rc[1] }}</td>
+      <td>{{ rc[2] }}</td>
+      <td>{{ rc[3] }}</td>
+      <td>{{ rc[6] }}</td> <!-- Customer Name -->
+      <td>{{ rc[7] }}</td> <!-- Unit ID -->
+      <td>
+        <a href="{{ url_for('edit_rental_contract', id=rc[0]) }}">Edit</a>
+        <form action="{{ url_for('delete_rental_contract', id=rc[0]) }}" method="post" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
