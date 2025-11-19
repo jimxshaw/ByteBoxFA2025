@@ -316,9 +316,9 @@ def delete_rental_contract(id):
     return redirect(url_for("list_rental_contracts"))
 
 
-################
-# PAYMEN ROUTES
-################
+#################
+# PAYMENT ROUTES
+#################
 # Read.
 @app.route("/payments")
 def list_payments():
