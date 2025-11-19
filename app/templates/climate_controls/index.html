@@ -1,0 +1,19 @@
+<!-- templates/climate_controls/index.html -->
+<h1>Climate Controls</h1>
+
+<table border="1">
+  <tr>
+    <th>Climate Controlled</th>
+    <th>Monthly Rate</th>
+    <th>Actions</th>
+  </tr>
+  {% for control in climate_controls %}
+  <tr>
+    <td>{{ control[0] }}</td> <!-- ClimateControlled (boolean PK) -->
+    <td>{{ control[1] }}</td> <!-- MonthlyRate -->
+    <td>
+      <a href="{{ url_for('edit_climate_control', climate_controlled=control[0]) }}">Edit</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
