@@ -3,6 +3,9 @@ from flask import Flask, request, redirect, render_template, url_for
 
 app = Flask(__name__)
 
+################
+# DB CONNECTION
+################
 def get_db_connection():
   conn = psycopg2.connect(
     host="db", # Must match the service name in docker-compose.yml.
@@ -12,6 +15,9 @@ def get_db_connection():
   )
   return conn
 
+##################
+# CUSTOMER ROUTES
+##################
 @app.route("/customers")
 def list_customers():
   conn = get_db_connection()
@@ -93,6 +99,60 @@ def delete_customer(id):
     conn.close()
     return redirect(url_for("list_customers"))
 
+######################
+# STORAGE UNIT ROUTES
+######################
+@app.route("/storage_units")
+def list_storage_units():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM StorageUnit ORDER BY ID;")
+    
+    units = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    return render_template("storage_units/index.html", units=units)
+
+@app.route("/storage_units/new", methods=["GET", "POST"])
+def create_storage_unit():
+    if request.method == "POST":
+        floor = request.form["floor"]
+        climate_controlled = request.form.get("climate_controlled", "false").lower() == "true"
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute(
+            "INSERT INTO StorageUnit (Floor, ClimateControlled) VALUES (%s, %s);",
+            (floor, climate_controlled),
+        )
+        
+        conn.commit()
+        
+        cursor.close()
+        conn.close()
+        return redirect(url_for("list_storage_units"))
+    return render_template("storage_units/create.html")
+
+@app.route("/storage_units/<int:id>/delete", methods=["POST"])
+def delete_storage_unit(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("DELETE FROM StorageUnit WHERE ID = %s;", (id,))
+    
+    conn.commit()
+    
+    cursor.close()
+    conn.close()
+    return redirect(url_for("list_storage_units"))
+
+
+#############
+# HOME ROUTE
+#############
 @app.route("/")
 def home():
   return redirect(url_for("list_customer"))
