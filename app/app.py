@@ -82,6 +82,7 @@ def edit_customer(id):
         conn.close()
         return redirect(url_for("list_customers"))
     
+    # A python tuple with one item must have a trailing comma.
     cursor.execute("SELECT * FROM customer WHERE id = %s", (id,))
     customer = cursor.fetchone()
 
@@ -95,6 +96,7 @@ def delete_customer(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
+    # A python tuple with one item must have a trailing comma.
     cursor.execute("DELETE FROM customer WHERE id = %s", (id,))
     
     conn.commit()
@@ -148,6 +150,7 @@ def delete_storage_unit(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
+    # A python tuple with one item must have a trailing comma.
     cursor.execute("DELETE FROM StorageUnit WHERE ID = %s;", (id,))
     
     conn.commit()
@@ -285,6 +288,7 @@ def edit_rental_contract(id):
         conn.close()
         return redirect(url_for("list_rental_contracts"))
     
+    # A python tuple with one item must have a trailing comma.
     cursor.execute("SELECT * FROM RentalContract WHERE ID = %s;", (id,))
     
     contract = cursor.fetchone()
@@ -306,6 +310,100 @@ def delete_rental_contract(id):
     cursor.close()
     conn.close()
     return redirect(url_for("list_rental_contracts"))
+
+################
+# PAYMEN ROUTES
+################
+# Read.
+@app.route("/payments")
+def list_payments():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT p.*, rc.ID as ContractID
+        FROM Payment p
+        JOIN RentalContract rc ON p.Contract_ID = rc.ID
+        ORDER BY p.PaymentDate DESC;
+    """)
+    
+    payments = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    return render_template("payments/index.html", payments=payments)
+
+# Create.
+@app.route("/payments/new", methods=["GET", "POST"])
+def new_payment():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+        payment_date = request.form["payment_date"]
+        amount = request.form["amount"]
+        method = request.form["method"]
+        contract_id = request.form["contract_id"]
+
+        cursor.execute("""
+            INSERT INTO Payment (PaymentDate, Amount, Method, Contract_ID)
+            VALUES (%s, %s, %s, %s);
+        """, (payment_date, amount, method, contract_id))
+
+        conn.commit()
+        
+        cursor.close()
+        conn.close()
+        return redirect(url_for("list_payments"))
+
+    cursor.execute("SELECT ID FROM RentalContract;")
+    
+    contracts = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    return render_template("payments/new.html", contracts=contracts)   
+
+# Update.
+@app.route("/payments/<int:id>/edit", methods=["GET", "POST"])
+def edit_payment(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+        method = request.form["method"]
+
+        cursor.execute("UPDATE Payment SET Method = %s WHERE ID = %s;", (method, id))
+        
+        conn.commit()
+        
+        cursor.close()
+        conn.close()
+        return redirect(url_for("list_payments"))
+
+    # A python tuple with one item must have a trailing comma.
+    cursor.execute("SELECT * FROM Payment WHERE ID = %s;", (id,))
+    
+    payment = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    return render_template("payments/edit.html", payment=payment)
+
+# Delete.
+@app.route("/payments/<int:id>/delete", methods=["POST"])
+def delete_payment(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # A python tuple with one item must have a trailing comma.
+    cursor.execute("DELETE FROM Payment WHERE ID = %s;", (id,))
+    
+    conn.commit()
+    
+    cursor.close()
+    conn.close()
+    return redirect(url_for("list_payments"))
 
 #############
 # HOME ROUTE
