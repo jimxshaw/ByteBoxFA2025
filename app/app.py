@@ -15,6 +15,7 @@ def get_db_connection():
   )
   return conn
 
+
 ##################
 # CUSTOMER ROUTES
 ##################
@@ -105,6 +106,7 @@ def delete_customer(id):
     conn.close()
     return redirect(url_for("list_customers"))
 
+
 ######################
 # STORAGE UNIT ROUTES
 ######################
@@ -159,9 +161,10 @@ def delete_storage_unit(id):
     conn.close()
     return redirect(url_for("list_storage_units"))
 
-######################
+
+############################
 # CLIMATE CONTROLLED ROUTES
-######################
+############################
 # Read.
 @app.route("/climate_controls")
 def list_climate_controls():
@@ -207,6 +210,7 @@ def edit_climate_control(climate_controlled):
     cursor.close()
     conn.close()
     return render_template("climate_controls/edit.html", control=control)
+
 
 #########################
 # RENTAL CONTRACT ROUTES
@@ -311,6 +315,7 @@ def delete_rental_contract(id):
     conn.close()
     return redirect(url_for("list_rental_contracts"))
 
+
 ################
 # PAYMEN ROUTES
 ################
@@ -405,12 +410,13 @@ def delete_payment(id):
     conn.close()
     return redirect(url_for("list_payments"))
 
+
 #############
 # HOME ROUTE
 #############
 @app.route("/")
 def home():
-  return redirect(url_for("list_customer"))
+  return redirect(url_for("list_customers"))
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000, debug=True)

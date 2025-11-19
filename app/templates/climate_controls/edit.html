@@ -1,0 +1,12 @@
+<!-- templates/climate_controls/edit.html -->
+<h1>Edit Climate Control Rate</h1>
+
+<form method="POST">
+  <label for="climate_controlled">Climate Controlled:</label>
+  <input type="text" name="climate_controlled" value="{{ control[0] }}" readonly>
+
+  <label for="monthly_rate">Monthly Rate:</label>
+  <input type="text" name="monthly_rate" value="{{ control[1] }}" required>
+
+  <input type="submit" value="Update">
+</form>
