@@ -1,0 +1,26 @@
+<!-- templates/storage_units/create.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Storage Unit</title>
+</head>
+<body>
+  <h1>Create New Storage Unit</h1>
+
+  <form method="POST">
+    <label for="floor">Floor:</label>
+    <input type="number" name="floor" required><br><br>
+
+    <label for="climate_controlled">Climate Controlled:</label>
+    <select name="climate_controlled">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select><br><br>
+
+    <button type="submit">Create</button>
+  </form>
+
+  <br>
+  <a href="{{ url_for('list_storage_units') }}">Back to List</a>
+</body>
+</html>
