@@ -416,7 +416,7 @@ def delete_payment(id):
 #############
 @app.route("/")
 def home():
-  return redirect(url_for("list_customers"))
+  return render_template("home.html")
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000, debug=True)
