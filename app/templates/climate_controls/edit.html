@@ -1,12 +1,24 @@
-<!-- templates/climate_controls/edit.html -->
-<h1>Edit Climate Control Rate</h1>
+{% extends "layout.html" %}
 
-<form method="POST">
-  <label for="climate_controlled">Climate Controlled:</label>
-  <input type="text" name="climate_controlled" value="{{ control[0] }}" readonly>
+{% block title %}Edit Climate Control Rate - ByteBox{% endblock %}
 
-  <label for="monthly_rate">Monthly Rate:</label>
-  <input type="text" name="monthly_rate" value="{{ control[1] }}" required>
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Edit Climate Control Rate</h1>
 
-  <input type="submit" value="Update">
-</form>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="climate_controlled" class="form-label">Climate Controlled</label>
+      <input type="text" class="form-control" name="climate_controlled" value="{{ control[0] }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="monthly_rate" class="form-label">Monthly Rate</label>
+      <input type="text" class="form-control" name="monthly_rate" value="{{ control[1] }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ url_for('list_climate_controls') }}" class="btn btn-secondary ms-2">Back to List</a>
+  </form>
+</div>
+{% endblock %}
