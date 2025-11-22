@@ -1,19 +1,34 @@
-<!-- templates/climate_controls/index.html -->
-<h1>Climate Controls</h1>
+{% extends "layout.html" %}
 
-<table border="1">
-  <tr>
-    <th>Climate Controlled</th>
-    <th>Monthly Rate</th>
-    <th>Actions</th>
-  </tr>
-  {% for control in climate_controls %}
-  <tr>
-    <td>{{ control[0] }}</td> <!-- ClimateControlled (boolean PK) -->
-    <td>{{ control[1] }}</td> <!-- MonthlyRate -->
-    <td>
-      <a href="{{ url_for('edit_climate_control', climate_controlled=control[0]) }}">Edit</a>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+{% block title %}Climate Control - ByteBox{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Climate Controls</h1>
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Climate Controlled</th>
+        <th scope="col">Monthly Rate ($)</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for control in climate_controls %}
+      <tr>
+        <td>{{ "Yes" if control[0] else "No" }}</td>
+        <td>{{ control[1] }}</td>
+        <td>
+          <a href="{{ url_for('edit_climate_control', climate_controlled=control[0]) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+  </div>
+</div>
+{% endblock %}
