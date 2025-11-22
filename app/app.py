@@ -426,6 +426,33 @@ def delete_payment(id):
 
     return redirect(url_for("list_payments"))
 
+##################
+# INSECURE LOOKUP
+##################
+@app.route("/insecure_lookup", methods=["GET", "POST"])
+def insecure_email_lookup():
+    results = None
+    error = None
+
+    if request.method == "POST":
+        email = request.form["email"]
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            # UNSAFE! Direct string interpolation = SQL Injection vulnerability.
+            query = f"SELECT * FROM Customer WHERE email = '{email}'"
+            
+            cursor.execute(query)
+
+            results = cursor.fetchall()
+        except Exception as ex:
+            error = str(ex)
+
+    return render_template("insecure_lookup.html", results=results, error=error)
+
+
 
 #############
 # HOME ROUTE
