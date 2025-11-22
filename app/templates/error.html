@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
-{% block title %}Deletion Error{% endblock %}
+{% block title %}Error - ByteBox{% endblock %}
 
 {% block content %}
   <div class="alert alert-danger mt-4">
-    <h4 class="alert-heading">Deletion Not Allowed</h4>
+    <h4 class="alert-heading">Oops! Something went wrong!</h4>
     <p>{{ message }}</p>
     <hr>
     <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
