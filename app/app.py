@@ -452,6 +452,29 @@ def insecure_email_lookup():
 
     return render_template("insecure_lookup.html", results=results, error=error)
 
+################
+# SECURE LOOKUP
+################
+@app.route("/secure_lookup", methods=["GET", "POST"])
+def secure_email_lookup():
+    results = None
+    error = None
+
+    if request.method == "POST":
+        email = request.form["email"]
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            # SAFE — parameterized query
+            query = "SELECT * FROM Customer WHERE email = %s"
+
+            cursor.execute(query, (email,))
+
+            results = cursor.fetchall()
+        except Exception as ex:
+            error = str(ex)
+    return render_template("secure_lookup.html", results=results, error=error)
 
 
 #############
