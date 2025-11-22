@@ -222,9 +222,9 @@ def list_rental_contracts():
     cursor = conn.cursor()
     
     cursor.execute("""
-        SELECT rc.*, c.Name, su.ID as UnitNumber
+        SELECT rc.*, c.FirstName, c.LastName, su.ID as UnitNumber
         FROM RentalContract rc
-        JOIN Customer c ON rc.CustomerID = c.ID
+        JOIN Customer c ON rc.Customer_ID = c.ID
         JOIN StorageUnit su ON rc.Unit_ID = su.ID
         ORDER BY rc.ID;
     """)
