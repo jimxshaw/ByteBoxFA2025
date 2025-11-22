@@ -97,13 +97,17 @@ def delete_customer(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # A python tuple with one item must have a trailing comma.
-    cursor.execute("DELETE FROM customer WHERE id = %s", (id,))
-    
-    conn.commit()
-    
-    cursor.close()
-    conn.close()
+    try:
+        # A python tuple with one item must have a trailing comma.
+        cursor.execute("DELETE FROM customer WHERE id = %s", (id,))
+        conn.commit()
+    except psycopg2.IntegrityError as ex:
+        conn.rollback()
+        return render_template("error.html", message="Cannot delete this customer because they are referenced in another record.")
+    finally:
+        cursor.close()
+        conn.close()
+
     return redirect(url_for("list_customers"))
 
 
@@ -152,13 +156,17 @@ def delete_storage_unit(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # A python tuple with one item must have a trailing comma.
-    cursor.execute("DELETE FROM StorageUnit WHERE ID = %s;", (id,))
-    
-    conn.commit()
-    
-    cursor.close()
-    conn.close()
+    try:
+        # A python tuple with one item must have a trailing comma.
+        cursor.execute("DELETE FROM StorageUnit WHERE ID = %s;", (id,))
+        conn.commit()
+    except psycopg2.IntegrityError as ex:
+        conn.rollback()
+        return render_template("error.html", message="Cannot delete this storage unit because it's in use by a rental contract.")
+    finally:    
+        cursor.close()
+        conn.close()
+
     return redirect(url_for("list_storage_units"))
 
 
@@ -222,9 +230,9 @@ def list_rental_contracts():
     cursor = conn.cursor()
     
     cursor.execute("""
-        SELECT rc.*, c.Name, su.ID as UnitNumber
+        SELECT rc.*, c.FirstName, c.LastName, su.ID as UnitNumber
         FROM RentalContract rc
-        JOIN Customer c ON rc.CustomerID = c.ID
+        JOIN Customer c ON rc.Customer_ID = c.ID
         JOIN StorageUnit su ON rc.Unit_ID = su.ID
         ORDER BY rc.ID;
     """)
@@ -307,12 +315,16 @@ def delete_rental_contract(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    cursor.execute("DELETE FROM RentalContract WHERE ID = %s;", (id,))
-    
-    conn.commit()
-    
-    cursor.close()
-    conn.close()
+    try:
+        cursor.execute("DELETE FROM RentalContract WHERE ID = %s;", (id,))
+        conn.commit()
+    except psycopg2.IntegrityError as ex:
+        conn.rollback()
+        return render_template("error.html", message="Cannot delete this rental contract because it has related payments.")
+    finally:
+        cursor.close()
+        conn.close()
+
     return redirect(url_for("list_rental_contracts"))
 
 
@@ -401,13 +413,17 @@ def delete_payment(id):
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # A python tuple with one item must have a trailing comma.
-    cursor.execute("DELETE FROM Payment WHERE ID = %s;", (id,))
-    
-    conn.commit()
-    
-    cursor.close()
-    conn.close()
+    try:
+        # A python tuple with one item must have a trailing comma.
+        cursor.execute("DELETE FROM Payment WHERE ID = %s;", (id,))
+        conn.commit()
+    except psycopg2.IntegrityError as ex:
+        conn.rollback()
+        return render_template("error.html", message="Could not delete this payment.")
+    finally:
+        cursor.close()
+        conn.close()
+
     return redirect(url_for("list_payments"))
 
 

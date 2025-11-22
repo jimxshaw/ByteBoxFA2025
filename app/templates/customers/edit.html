@@ -1,24 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Edit Customer</title>
-</head>
-<body>
-  <h1>Edit Customer #{{ customer[0] }}</h1>
+{% extends "layout.html" %}
+
+{% block title %}Edit Customer - ByteBox{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Edit Customer #{{ customer[0] }}</h2>
   <form method="post">
-    <label>First Name:</label><br>
-    <input type="text" name="first_name" value="{{ customer[1] }}" required><br><br>
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" value="{{ customer[1] }}" required>
+    </div>
 
-    <label>Last Name:</label><br>
-    <input type="text" name="last_name" value="{{ customer[2] }}" required><br><br>
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" value="{{ customer[2] }}" required>
+    </div>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" value="{{ customer[3] }}" required><br><br>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ customer[4] }}" required>
+    </div>
 
-    <label>Phone:</label><br>
-    <input type="text" name="phone" value="{{ customer[4] }}" required><br><br>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="{{ customer[3] }}" required>
+    </div>
 
-    <button type="submit">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ url_for('list_customers') }}" class="btn btn-secondary ms-2">Cancel</a>
   </form>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,37 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Payments</title>
-</head>
-<body>
-  <h1>Payments</h1>
+{% extends "layout.html" %}
 
-  <a href="{{ url_for('new_payment') }}">New Payment</a>
+{% block title %}Payments - ByteBox{% endblock %}
 
-  <table border="1">
-    <tr>
-      <th>ID</th>
-      <th>Date</th>
-      <th>Amount</th>
-      <th>Method</th>
-      <th>Rental Contract ID</th>
-      <th>Actions</th>
-    </tr>
-    {% for p in payments %}
-    <tr>
-      <td>{{ p[0] }}</td>
-      <td>{{ p[1] }}</td>
-      <td>{{ p[2] }}</td>
-      <td>{{ p[3] }}</td>
-      <td>{{ p[4] }}</td>
-      <td>
-        <a href="{{ url_for('edit_payment', id=p[0]) }}">Edit</a>
-        <form action="{{ url_for('delete_payment', id=p[0]) }}" method="post" style="display:inline;">
-          <button type="submit">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-</body>
-</html>
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Payments</h1>
+
+  <a href="{{ url_for('new_payment') }}" class="btn btn-success mb-3">New Payment</a>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Method</th>
+          <th>Rental Contract ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in payments %}
+        <tr>
+          <td>{{ p[0] }}</td>
+          <td>{{ p[1] }}</td>
+          <td>${{ "%.2f"|format(p[2]) }}</td>
+          <td>{{ p[3] }}</td>
+          <td>{{ p[4] }}</td>
+          <td>
+            <a href="{{ url_for('edit_payment', id=p[0]) }}" class="btn btn-sm btn-primary">Edit</a>
+            <form action="{{ url_for('delete_payment', id=p[0]) }}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+{% endblock %}

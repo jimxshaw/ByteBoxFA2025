@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Edit Rental Contract</title>
-</head>
-<body>
-  <h1>Edit Rental Contract #{{ contract[0] }}</h1>
+{% extends "layout.html" %}
+
+{% block title %}Edit Rental Contract - ByteBox{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Edit Rental Contract #{{ contract[0] }}</h2>
   <form method="post">
-    <label>End Date:</label><br>
-    <input type="date" name="end_date" value="{{ contract[2] }}" required><br><br>
+    <div class="mb-3">
+      <label for="end_date" class="form-label">End Date</label>
+      <input type="date" class="form-control" name="end_date" value="{{ contract[2] }}" required>
+    </div>
 
-    <label>Monthly Rate:</label><br>
-    <input type="number" step="0.01" name="monthly_rate" value="{{ contract[3] }}" required><br><br>
+    <div class="mb-3">
+      <label for="monthly_rate" class="form-label">Monthly Rate</label>
+      <input type="number" step="0.01" class="form-control" name="monthly_rate" value="{{ contract[3] }}" required>
+    </div>
 
-    <button type="submit">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ url_for('list_rental_contracts') }}" class="btn btn-secondary ms-2">Cancel</a>
   </form>
-</body>
-</html>
+</div>
+{% endblock %}
