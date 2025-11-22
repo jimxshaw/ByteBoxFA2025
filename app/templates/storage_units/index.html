@@ -1,36 +1,44 @@
-<!-- templates/storage_units/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Storage Units</title>
-</head>
-<body>
-  <h1>All Storage Units</h1>
+{% extends "layout.html" %}
 
-  <a href="{{ url_for('create_storage_unit') }}">Add New Unit</a>
+{% block title %}Storage Units - ByteBox{% endblock %}
 
-  <table border="1">
-    <tr>
-      <th>ID</th>
-      <th>Floor</th>
-      <th>Climate Controlled</th>
-      <th>Actions</th>
-    </tr>
-    {% for unit in units %}
-    <tr>
-      <td>{{ unit[0] }}</td>
-      <td>{{ unit[1] }}</td>
-      <td>{{ "Yes" if unit[2] else "No" }}</td>
-      <td>
-        <form action="{{ url_for('delete_storage_unit', id=unit[0]) }}" method="POST" style="display:inline;">
-          <button type="submit" onclick="return confirm('Delete this unit?')">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">All Storage Units</h1>
+
+  <a href="{{ url_for('create_storage_unit') }}" class="btn btn-success mb-3">
+    <i class="bi bi-plus-circle"></i> Add New Unit
+  </a>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Floor</th>
+        <th>Climate Controlled</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for unit in units %}
+      <tr>
+        <td>{{ unit[0] }}</td>
+        <td>{{ unit[1] }}</td>
+        <td>{{ "Yes" if unit[2] else "No" }}</td>
+        <td>
+          <form action="{{ url_for('delete_storage_unit', id=unit[0]) }}" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this unit?')">
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
   </table>
 
-  <br>
-  <a href="{{ url_for('home') }}">Back to Home</a>
-</body>
-</html>
+  <a href="{{ url_for('home') }}" class="btn btn-secondary">
+    ← Back to Home
+  </a>
+</div>
+{% endblock %}
