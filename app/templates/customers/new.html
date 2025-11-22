@@ -1,24 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>New Customer</title>
-</head>
-<body>
-  <h1>Add New Customer</h1>
+{% extends "layout.html" %}
+
+{% block title %}Add Customer - ByteBox{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Add New Customer</h1>
+
   <form method="post">
-    <label>First Name:</label><br>
-    <input type="text" name="first_name" required><br><br>
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name:</label>
+      <input type="text" class="form-control" name="first_name" id="first_name" required>
+    </div>
 
-    <label>Last Name:</label><br>
-    <input type="text" name="last_name" required><br><br>
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name:</label>
+      <input type="text" class="form-control" name="last_name" id="last_name" required>
+    </div>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" required>
+    </div>
 
-    <label>Phone:</label><br>
-    <input type="text" name="phone" required><br><br>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone:</label>
+      <input type="text" class="form-control" name="phone" id="phone" required>
+    </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a href="{{ url_for('list_customers') }}" class="btn btn-secondary ms-2">Cancel</a>
   </form>
-</body>
-</html>
+</div>
+{% endblock %}
