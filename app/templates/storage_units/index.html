@@ -27,7 +27,7 @@
         <td>{{ "Yes" if unit[2] else "No" }}</td>
         <td>
           <form action="{{ url_for('delete_storage_unit', id=unit[0]) }}" method="POST" class="d-inline">
-            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this unit?')">
+            <button type="submit" class="btn btn-sm btn-danger">
               Delete
             </button>
           </form>

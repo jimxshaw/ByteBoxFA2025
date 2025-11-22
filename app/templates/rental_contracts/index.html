@@ -33,7 +33,7 @@
           <td>
             <a href="{{ url_for('edit_rental_contract', id=rc[0]) }}" class="btn btn-primary btn-sm">Edit</a>
             <form action="{{ url_for('delete_rental_contract', id=rc[0]) }}" method="post" style="display:inline;">
-              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this contract?')">Delete</button>
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
           </td>
         </tr>
