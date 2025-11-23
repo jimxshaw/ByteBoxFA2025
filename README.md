@@ -1,6 +1,6 @@
 # ByteBox Self-Storage Management System
 
-This project is a rental management system built with:
+This project is a management system for self-storage businesses built with:
 - **Python** (Flask) for the backend.
 - **Jinja2** for the frontend templating.
 - **PostgreSQL** for the database.
@@ -60,5 +60,5 @@ sudo pacman -S docker docker-compose
 
     - Tear down, build and run the necessary Docker containers.
     - Set up the database.
-    - Launch the application on *http://localhost:5000*.
+    - Launch the application on **http://localhost:5000**.
     - Log into the database and allow you to run SQL queries and other commands.
