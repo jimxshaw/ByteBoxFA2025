@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Secure Lookup - ByteBox{% endblock %}
+
+{% block content %}
+  <h2>Secure Email Lookup (Prepared)</h2>
+  <form method="post">
+    <div class="form-group">
+      <label for="email">Enter Email:</label>
+      <input type="email" class="form-control" name="email" placeholder="Enter a valid email" required>
+    </div>
+    <button type="submit" class="btn btn-success">Search</button>
+  </form>
+
+  {% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+  {% endif %}
+
+  {% if results %}
+    <h4 class="mt-4">Results:</h4>
+    <ul class="list-group">
+      {% for row in results %}
+        <li class="list-group-item">{{ row }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

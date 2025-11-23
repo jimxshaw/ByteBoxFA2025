@@ -5,7 +5,7 @@
 {% block content %}
 <div class="text-center mt-5">
   <h1 class="display-4">Byte Box</h1>
-  <p class="lead">Self-storage Management System</p>
+  <p class="lead">Self-Storage Management System</p>
   
   <div class="d-grid gap-3 col-6 mx-auto mt-5">
     <a href="{{ url_for('list_customers') }}" class="btn btn-primary btn-lg">Manage Customers</a>
@@ -13,6 +13,8 @@
     <a href="{{ url_for('list_climate_controls') }}" class="btn btn-info btn-lg text-white">Climate Controls</a>
     <a href="{{ url_for('list_rental_contracts') }}" class="btn btn-success btn-lg">Rental Contracts</a>
     <a href="{{ url_for('list_payments') }}" class="btn btn-warning btn-lg">Payments</a>
+    <a href="{{ url_for('insecure_email_lookup') }}" class="btn btn-outline-danger">Insecure SQL Injection Test</a>
+    <a href="{{ url_for('secure_email_lookup') }}" class="btn btn-outline-success">Secure SQL Injection Test</a>
   </div>
 </div>
 {% endblock %}
