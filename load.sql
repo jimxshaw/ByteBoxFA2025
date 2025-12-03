@@ -4,10 +4,10 @@ INSERT INTO ClimateControl (ClimateControlled, MonthlyRate) VALUES
     (FALSE, 400.00);
 
 -- Load sample data into Customer table.
-INSERT INTO Customer (ID, FirstName, LastName, Phone, Email, Address) VALUES
-    (1, 'Alice', 'Anderson', '555-1234', 'alice@example.com', '123 Main St'),
-    (2, 'Bob', 'Brown', '555-2345', 'bob@example.com', '456 Oak Ave'),
-    (3, 'Charlie', 'Clark', '555-3456', 'charlie@example.com', '789 Pine Rd');
+INSERT INTO Customer (FirstName, LastName, Phone, Email, Address) VALUES
+    ('Alice', 'Anderson', '555-1234', 'alice@example.com', '123 Main St'),
+    ('Bob', 'Brown', '555-2345', 'bob@example.com', '456 Oak Ave'),
+    ('Charlie', 'Clark', '555-3456', 'charlie@example.com', '789 Pine Rd');
 
 -- Load sample data into StorageUnit table.
 INSERT INTO StorageUnit (ID, Floor, ClimateControlled) VALUES
